@@ -27,14 +27,13 @@ const orderSchema = mongoose.Schema({
 
   customerEmail: {
     type: String,
-    unique: [true, "Please enter your new email"],
+    unique: true,
     required: [true, "Please enter your email Id"],
   },
 
   customerPhone: {
     type: Number,
-    required: true,
-    // require: [true, "Please enter your phone number"],
+    required: [true, "Please enter your phone number"],
   },
 
   companyName: {
@@ -43,7 +42,7 @@ const orderSchema = mongoose.Schema({
 
   shippingAddress: {
     type: String,
-    required: true,
+    required: [true, "Please enter your shipping address"],
   },
 
   paymentReceipt: [

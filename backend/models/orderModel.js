@@ -12,18 +12,16 @@ const orderSchema = mongoose.Schema({
     // required: [true, "Please enter your job"],
   },
 
-  cardLogo: [
-    {
-      public_id: {
-        type: String,
-        required: false,
-      },
-      url: {
-        type: String,
-        required: false,
-      },
+  cardLogo: {
+    public_id: {
+      type: String,
+      required: false,
     },
-  ],
+    url: {
+      type: String,
+      required: false,
+    },
+  },
 
   customerEmail: {
     type: String,
@@ -45,18 +43,16 @@ const orderSchema = mongoose.Schema({
     required: [true, "Please enter your shipping address"],
   },
 
-  paymentReceipt: [
-    {
-      public_id: {
-        type: String,
-        required: true,
-      },
-      url: {
-        type: String,
-        required: true,
-      },
+  paymentReceipt: {
+    public_id: {
+      type: String,
+      required: true,
     },
-  ],
+    url: {
+      type: String,
+      required: true,
+    },
+  },
 
   cardQuantity: {
     type: Number,

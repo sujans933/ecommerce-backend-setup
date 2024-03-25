@@ -8,8 +8,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Route  Imports
 const order = require("./routes/orderRoute");
+const user = require("./routes/userRoute");
 
 app.use("/api", order);
+app.use("/api/v1", user);
 
 // Middleware for error
 app.use(errorMiddleware);

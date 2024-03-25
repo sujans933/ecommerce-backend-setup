@@ -53,45 +53,6 @@ exports.createOrder = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// exports.createOrder = catchAsyncErrors(async (req, res, next) => {
-//   console.log(req.body);
-//   const myCloud = await cloudinary.v2.uploader.upload(req.body.cardLogo, {
-//     folder: "orders",
-//   });
-
-//   const {
-//     customerName,
-//     customerJob,
-//     customerEmail,
-//     customerPhone,
-//     companyName,
-//     shippingAddress,
-//   } = req.body;
-
-//   // Create the order with the updated request body
-//   const order = await Order.create({
-//     customerName,
-//     customerJob,
-//     cardLogo: {
-//       public_id: myCloud.public_id,
-//       url: myCloud.secure_url,
-//     },
-//     customerEmail,
-//     customerPhone,
-//     companyName,
-//     shippingAddress,
-//   });
-
-//   if (!order) {
-//     return next(new ErrorHandler("Order not completed", 404));
-//   }
-
-//   res.status(200).json({
-//     success: true,
-//     order,
-//   });
-// });
-
 // Get all Orders --by Admin
 exports.getAllOrders = catchAsyncErrors(async (req, res) => {
   const orders = await Order.find();
@@ -99,5 +60,21 @@ exports.getAllOrders = catchAsyncErrors(async (req, res) => {
   res.status(200).json({
     success: true,
     orders,
+  });
+});
+
+// Delete order by ID --by Admin
+
+exports.deleteOrder = catchAsyncErrors(async (req, res, next) => {
+  const order = await Order.findById(req.params.id);
+
+  if (!order) {
+    return next(new ErrorHandler("Order not found", 404));
+  }
+  await order.deleteOne();
+
+  res.status(200).json({
+    success: true,
+    message: "Order deleteed successfully",
   });
 });

@@ -1,5 +1,9 @@
 const express = require("express");
-const { getAllOrders, createOrder } = require("../controllers/orderController");
+const {
+  getAllOrders,
+  createOrder,
+  deleteOrder,
+} = require("../controllers/orderController");
 const upload = require("../middleware/uploader.middleware");
 
 const router = express.Router();
@@ -12,5 +16,6 @@ router.route("/order").post(
   createOrder
 );
 router.route("/orders").get(getAllOrders);
+router.route("/orders/:id").delete(deleteOrder);
 
 module.exports = router;

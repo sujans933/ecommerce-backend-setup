@@ -5,10 +5,10 @@ module.exports = (err, req, res, next) => {
   err.message = err.message || "Internal Server Error";
 
   // Mongodb validation error
-  if (err.name === "ValidationError") {
-    const message = `Form not filled properly. Invalid: ${err.path}`;
-    err = new ErrorHandler(message, 400);
-  }
+  // if (err.name === "ValidationError") {
+  //   const message = `Form not filled properly. Invalid: ${err.path}`;
+  //   err = new ErrorHandler(message, 400);
+  // }
 
   // Wrong Mongodb Id error
   if (err.name === "CastError") {
@@ -18,6 +18,6 @@ module.exports = (err, req, res, next) => {
 
   res.status(err.statusCode).json({
     success: false,
-    message: err.stack,
+    message: err.message,
   });
 };
